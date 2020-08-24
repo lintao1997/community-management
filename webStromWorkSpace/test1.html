@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .liuyan{width: 70%;height: 150px;box-sizing: border-box;border: 1px dashed aqua;margin-bottom: 15px;}
+        .pic{width: 150px;height: 150px;float: left;}
+        .text{width:400px;height: 150px;float: left;}
+        .delete{height: 150px;float: left;}
+    </style>
+</head>
+<body>
+<div id="demo" style="width: 65%;margin: 0 auto;">
+    <div>
+        <textarea rows="6" cols="80" id="content"></textarea>
+        <button id="submit">发布</button>
+    </div>
+
+    <div class="liuyan">
+        <div class="pic"><img src="img/avatar.png" width="150" height="150"></div>
+        <div class="text">努力学习，让学习成为一种习惯</div>
+        <div class="delete"><input type="button" name="del" value="删除" onclick="del(this)"></div>
+    </div>
+    <div style="clear: both;"></div>
+
+</div>
+
+<script>
+    var demo = document.getElementById('demo');
+    var submit = document.getElementById('submit');
+    submit.addEventListener('click',add);
+
+    function add(){
+        var content = document.getElementById('content').value;
+        var div = document.createElement('div');
+        div.setAttribute('class','liuyan');
+        //
+        var div1 = document.createElement('div');
+        var div2 = document.createElement('div');
+        var div3 = document.createElement('div');
+        div1.setAttribute('class','pic');
+        div2.setAttribute('class','text');
+        div3.setAttribute('class','delete');
+        div.appendChild(div1);
+        div.appendChild(div2);
+        div.appendChild(div3);
+        //
+        var img = document.createElement('img');
+        img.setAttribute('src','img/703.jpg');
+        img.setAttribute('width','150');
+        img.setAttribute('height','150');
+        div1.appendChild(img);
+        //
+        var del = document.createElement('input');
+        del.setAttribute('type','button');
+        del.setAttribute('name','del');
+        del.setAttribute('value','删除');
+        del.setAttribute('onclick','del(this)');
+        div3.appendChild(del);
+        //
+        div2.innerHTML = content;
+        demo.appendChild(div);
+        alert('发布成功');
+    }
+    function del(obj){
+        var del = obj.parentNode;
+        var liuyan = del.parentNode;
+        var demo = liuyan.parentNode;
+        demo.removeChild(liuyan);
+    }
+</script>
+</body>
+</html>

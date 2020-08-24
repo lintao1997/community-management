@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/blog/default/css/bootstrap.min.css}">
+</head>
+<body id="blog">
+<div class="container">
+    <h1>留言板</h1>
+    <span th:text="${session.blogUser.username}"></span>
+    <form th:action="@{/board/comment}" method="post" style="width: 80%;">
+               <input name="userId" th:value="${session.blogUser.username}" hidden="hidden" />
+        <input name="id" th:value="${session.blogUser.id}" hidden="hidden" />
+        <div th:if="${session.blogUser.username == null}">
+            <a th:href="@{/user/toLogin}"> <textarea
+                    style="height: 150px; width: 600px;">
+						需要留言请先登陆哦！
+						登陆请点击我！
+					</textarea>
+            </a>
+        </div>
+        <div th:unless="${session.blogUser.username == null}">
+				<textarea id="lw_content" name="comment"  placeholder="请输入您的留言"
+                          style="height: 150px; width: 400px">
+				</textarea>
+        </div>
+         <br /> <input class="btn" type="submit" value="留言" >  
+        <hr>
+    </form>
+
+    <div class="comment-parent"  th:each="list : ${commentList}" >
+        <span th:text="${list.userId}"></span><br>
+        <span th:text="${list.comment}"></span><br>
+        <span th:text="${#dates.format(list.createTime, 'yyyy/MM/dd hh:MM:ss')}"></span><br>
+        <div th:if="${session.blogUser.username == null}">
+            <a th:href="@{/user/toLogin}">go login in!</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a th:href="@{/user/toRegister}">go login up!</a>
+        </div>
+        <div th:unless="${session.blogUser.username == null}">
+            <a href="#" class="btn_reply" onclick="func()">回复</a>
+        </div>
+        <form id = "hidden_table" style="display:none">
+            <input type="text" name="userId" th:value="${session.blogUser.username}" hidden="true"/><br>
+            <input type="text" name="otherId" th:value="${list.userId}" hidden="true"/><br>
+            <input type="text" name="state" th:value="${list.state}" hidden="true"/><br>
+            <input type="text" name="commentId" th:value="${list.id}" hidden="true"/><br>
+            <textarea rows="5%" cols="40%" name="comment"></textarea><br>
+            <input class="btn-submit" type="submit" value="发表" onclick="btnReplyTo()">
+        </form>
+        <hr>
+    </div>
+</div>
+</body>
+<script th:src="@{/blog/amaze/js/jquery-3.2.1.min.js}"></script>
+<script type="text/javascript">
+    function func(){
+        $(".btn_reply").click(function(){
+            if($(this).html()=='回复'){
+                $(this).parent().siblings('form').css('style','display:block');
+                console.log($(this).parent().siblings('form').css('style', 'display:block'));
+                $(this).text('收回');
+            }else{
+                $(this).parent().siblings('form').css('style','display:none');
+                $(this).text('回复');
+            }
+        });
+    }
+    function btnReplyTo(){
+        $.post({
+            url:"/reply/comment",
+            data:$('#hidden_table').serialize(),
+            dataType:"json",
+            success:function(r){
+                alert("aaadsa");
+                if(r.resultCode==200){
+                    alert("success");
+                    alert(r.resultCode);
+                    console.log(r.resultCode);
+                }else{
+                    alert(r.message);
+                    alert("fail");
+                    console.log(r.message);
+                }
+            }
+        });
+    }
+</script>
+</html>
