@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gks.lcf.com.dao.NewsMapper" >
+  <resultMap id="BaseResultMap4" type="gks.lcf.com.entity.News" >
+    <id column="n_id" property="nId" jdbcType="INTEGER" />
+    <result column="n_name" property="nName" jdbcType="VARCHAR" />
+    <result column="n_proposer" property="nProposer" jdbcType="VARCHAR" />
+    <result column="n_release_time" property="nReleaseTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="gks.lcf.com.entity.News" extends="BaseResultMap4" >
+    <result column="n_content" property="nContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    n_id, n_name, n_proposer, n_release_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    n_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news
+    where n_id = #{nId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from news
+    where n_id = #{nId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="gks.lcf.com.entity.News" >
+    insert into news (n_id, n_name, n_proposer, 
+      n_release_time, n_content)
+    values (#{nId,jdbcType=INTEGER}, #{nName,jdbcType=VARCHAR}, #{nProposer,jdbcType=VARCHAR}, 
+      #{nReleaseTime,jdbcType=TIMESTAMP}, #{nContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="gks.lcf.com.entity.News" >
+    insert into news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nId != null" >
+        n_id,
+      </if>
+      <if test="nName != null" >
+        n_name,
+      </if>
+      <if test="nProposer != null" >
+        n_proposer,
+      </if>
+      <if test="nReleaseTime != null" >
+        n_release_time,
+      </if>
+      <if test="nContent != null" >
+        n_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nId != null" >
+        #{nId,jdbcType=INTEGER},
+      </if>
+      <if test="nName != null" >
+        #{nName,jdbcType=VARCHAR},
+      </if>
+      <if test="nProposer != null" >
+        #{nProposer,jdbcType=VARCHAR},
+      </if>
+      <if test="nReleaseTime != null" >
+        #{nReleaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nContent != null" >
+        #{nContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="gks.lcf.com.entity.News" >
+    update news
+    <set >
+      <if test="nName != null" >
+        n_name = #{nName,jdbcType=VARCHAR},
+      </if>
+      <if test="nProposer != null" >
+        n_proposer = #{nProposer,jdbcType=VARCHAR},
+      </if>
+      <if test="nReleaseTime != null" >
+        n_release_time = #{nReleaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nContent != null" >
+        n_content = #{nContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where n_id = #{nId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="gks.lcf.com.entity.News" >
+    update news
+    set n_name = #{nName,jdbcType=VARCHAR},
+      n_proposer = #{nProposer,jdbcType=VARCHAR},
+      n_release_time = #{nReleaseTime,jdbcType=TIMESTAMP},
+      n_content = #{nContent,jdbcType=LONGVARCHAR}
+    where n_id = #{nId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="gks.lcf.com.entity.News" >
+    update news
+    set n_name = #{nName,jdbcType=VARCHAR},
+      n_proposer = #{nProposer,jdbcType=VARCHAR},
+      n_release_time = #{nReleaseTime,jdbcType=TIMESTAMP}
+    where n_id = #{nId,jdbcType=INTEGER}
+  </update>
+</mapper>

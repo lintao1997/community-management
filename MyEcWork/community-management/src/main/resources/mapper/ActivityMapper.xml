@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gks.lcf.com.dao.ActivityMapper" >
+  <resultMap id="BaseResultMap1" type="gks.lcf.com.entity.Activity" >
+    <id column="activity_id" property="activityId" jdbcType="INTEGER" />
+    <result column="activity_name" property="activityName" jdbcType="VARCHAR" />
+    <result column="activity_image" property="activityImage" jdbcType="VARCHAR" />
+    <result column="activity_starttime" property="activityStarttime" jdbcType="TIMESTAMP" />
+    <result column="activity_endtime" property="activityEndtime" jdbcType="TIMESTAMP" />
+    <result column="activity_propose" property="activityPropose" jdbcType="VARCHAR" />
+    <result column="activity_association" property="activityAssociation" jdbcType="VARCHAR" />
+    <result column="activity_status" property="activityStatus" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap id="ResultMapWithBLOBs" type="gks.lcf.com.entity.Activity" extends="BaseResultMap1" >
+    <result column="activity_content" property="activityContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    activity_id, activity_name, activity_image, activity_starttime, activity_endtime, 
+    activity_propose, activity_association, activity_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    activity_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from activity
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from activity
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="gks.lcf.com.entity.Activity" >
+    insert into activity (activity_id, activity_name, activity_image, 
+      activity_starttime, activity_endtime, 
+      activity_propose, activity_association, activity_status, 
+      activity_content)
+    values (#{activityId,jdbcType=INTEGER}, #{activityName,jdbcType=VARCHAR}, #{activityImage,jdbcType=VARCHAR}, 
+      #{activityStarttime,jdbcType=TIMESTAMP}, #{activityEndtime,jdbcType=TIMESTAMP}, 
+      #{activityPropose,jdbcType=VARCHAR}, #{activityAssociation,jdbcType=VARCHAR}, #{activityStatus,jdbcType=INTEGER}, 
+      #{activityContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="gks.lcf.com.entity.Activity" >
+    insert into activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="activityId != null" >
+        activity_id,
+      </if>
+      <if test="activityName != null" >
+        activity_name,
+      </if>
+      <if test="activityImage != null" >
+        activity_image,
+      </if>
+      <if test="activityStarttime != null" >
+        activity_starttime,
+      </if>
+      <if test="activityEndtime != null" >
+        activity_endtime,
+      </if>
+      <if test="activityPropose != null" >
+        activity_propose,
+      </if>
+      <if test="activityAssociation != null" >
+        activity_association,
+      </if>
+      <if test="activityStatus != null" >
+        activity_status,
+      </if>
+      <if test="activityContent != null" >
+        activity_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="activityId != null" >
+        #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="activityName != null" >
+        #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="activityImage != null" >
+        #{activityImage,jdbcType=VARCHAR},
+      </if>
+      <if test="activityStarttime != null" >
+        #{activityStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityEndtime != null" >
+        #{activityEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityPropose != null" >
+        #{activityPropose,jdbcType=VARCHAR},
+      </if>
+      <if test="activityAssociation != null" >
+        #{activityAssociation,jdbcType=VARCHAR},
+      </if>
+      <if test="activityStatus != null" >
+        #{activityStatus,jdbcType=INTEGER},
+      </if>
+      <if test="activityContent != null" >
+        #{activityContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="gks.lcf.com.entity.Activity" >
+    update activity
+    <set >
+      <if test="activityName != null" >
+        activity_name = #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="activityImage != null" >
+        activity_image = #{activityImage,jdbcType=VARCHAR},
+      </if>
+      <if test="activityStarttime != null" >
+        activity_starttime = #{activityStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityEndtime != null" >
+        activity_endtime = #{activityEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityPropose != null" >
+        activity_propose = #{activityPropose,jdbcType=VARCHAR},
+      </if>
+      <if test="activityAssociation != null" >
+        activity_association = #{activityAssociation,jdbcType=VARCHAR},
+      </if>
+      <if test="activityStatus != null" >
+        activity_status = #{activityStatus,jdbcType=INTEGER},
+      </if>
+      <if test="activityContent != null" >
+        activity_content = #{activityContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="gks.lcf.com.entity.Activity" >
+    update activity
+    set activity_name = #{activityName,jdbcType=VARCHAR},
+      activity_image = #{activityImage,jdbcType=VARCHAR},
+      activity_starttime = #{activityStarttime,jdbcType=TIMESTAMP},
+      activity_endtime = #{activityEndtime,jdbcType=TIMESTAMP},
+      activity_propose = #{activityPropose,jdbcType=VARCHAR},
+      activity_association = #{activityAssociation,jdbcType=VARCHAR},
+      activity_status = #{activityStatus,jdbcType=INTEGER},
+      activity_content = #{activityContent,jdbcType=LONGVARCHAR}
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="gks.lcf.com.entity.Activity" >
+    update activity
+    set activity_name = #{activityName,jdbcType=VARCHAR},
+      activity_image = #{activityImage,jdbcType=VARCHAR},
+      activity_starttime = #{activityStarttime,jdbcType=TIMESTAMP},
+      activity_endtime = #{activityEndtime,jdbcType=TIMESTAMP},
+      activity_propose = #{activityPropose,jdbcType=VARCHAR},
+      activity_association = #{activityAssociation,jdbcType=VARCHAR},
+      activity_status = #{activityStatus,jdbcType=INTEGER}
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="community-header">
+     <meta charset="UTF-8">
+     <title>社团主页</title>
+     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
+     <script type="text/javascript" th:src="@{/js/static-js/jquery.js}"></script>
+     <script type="text/javascript" th:src="@{/js/static-js/jquery.SuperSlide.2.1.1.js}"></script>
+</head>
+	<div th:fragment="community-header-nav">
+        <div class="aui-header-top">
+            <div class="aui-header-title">
+            </div>
+        </div>
+        <div class="aui-header-nav moveDown">
+            <div class="wrapper">
+                <a href="#">
+                    <div class="aui-logo">
+                        <h1>首页</h1>
+                    </div>
+                </a>
+                <div class="aui-top-nav">
+                    <ul class="menu">
+                        <li class="product">
+                            <a href="#">
+                                产品
+                                <span class="u-icon-caret"></span>
+                            </a>
+                            <div class="panel product">
+                                <div class="inner">
+                                    <dl class="list">
+                                        <dt>客户服务云: </dt>
+                                        <dd>
+                                            <a href="#">
+                                                <i class="icon-font icon-font-item001"></i>
+                                                <em class="txt">在线客服</em>
+                                            </a>
+                                        </dd>
+                                        <dd>
+                                            <a href="#">
+                                                <i class="icon-font icon-font-item002"></i>
+                                                <em class="txt">机器人</em>
+                                            </a>
+                                        </dd>
+                                        <dd>
+                                            <a href="#">
+                                                <i class="icon-font icon-font-item003"></i>
+                                                <em class="txt">呼叫中心</em>
+                                            </a>
+                                        </dd>
+                                        <dd>
+                                            <a href="#">
+                                                <i class="icon-font icon-font-item004"></i>
+                                                <em class="txt">工单系统</em>
+                                            </a>
+                                        </dd>
+                                    </dl>
+                                    <dl class="list">
+                                        <dt>营销服务云: </dt>
+                                        <dd>
+                                            <a href="#">
+                                                <i class="icon-font icon-font-item005"></i>
+                                                <em class="txt">营销服务</em>
+                                            </a>
+                                        </dd>
+                                    </dl>
+                                    <dl class="list">
+                                        <dt>场景支持: </dt>
+                                        <dd>
+                                            <a href="#">
+                                                <i class="icon-font icon-font-item006"></i>
+                                                <em class="txt">移动办公</em>
+                                            </a>
+                                        </dd>
+                                        <dd>
+                                            <a href="#">
+                                                <i class="icon-font icon-font-item007"></i>
+                                                <em class="txt">微信客服</em>
+                                            </a>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="finance">
+                            <a href="#">
+                                解决方案
+                                <span class="u-icon-caret"></span>
+                            </a>
+                            <div class="panel finance">
+                                <div class="inner">
+                                    <dl class="list">
+                                        <dd style="margin-left: -405px;">
+                                            <a href="#">
+                                                <i class="icon-font icon-font-item001"></i>
+                                                <em class="txt">互金解决方案</em>
+                                            </a>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#">案例
+                            </a>
+                        </li>
+                        <li class="price">
+                            <a href="#">
+                                价格
+                                <span class="u-icon-caret"></span>
+                            </a>
+                        </li>
+                        <li class="service">
+                            <a href="#">服务
+                            </a>
+                        </li>
+                        <li class="merchants">
+                            <a href="#">渠道合作
+                            </a>
+                        </li>
+                        <li class="college">
+                            <a href="#">轻学院
+                            </a>
+                        </li>
+                        <li class="qa">
+                            <a href="#">
+                                帮助
+                                <span class="u-icon-caret"></span>
+                            </a>
+                            <div class="panel qa">
+                                <div class="inner">
+                                    <dl class="list">
+                                        <dd>
+                                            <a href="#">
+                                                <i class="icon-font icon-font-item002"></i>
+                                                <em class="txt">帮助中心</em>
+                                            </a>
+                                        </dd>
+                                        <dd>
+                                            <a href="#">
+                                                <i class="icon-font icon-font-item003"></i>
+                                                <em class="txt">下载</em>
+                                            </a>
+                                        </dd>
+                                        <dd>
+                                            <a href="#">
+                                                <i class="icon-font icon-font-item004"></i>
+                                                <em class="txt">更新日志</em>
+                                            </a>
+                                        </dd>
+                                        <dd>
+                                            <a href="#">
+                                                <i class="icon-font icon-font-item005"></i>
+                                                <em class="txt">开发指南</em>
+                                            </a>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="community">
+                            <a href="#">博客</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="m-login">
+                    <a href="#" class="u-btn  sign">登录</a>
+                    <a href="#" class="u-btn  free">免费试用</a>
+                </div>
+            </div>
+        </div>
+     </div>
+</html>

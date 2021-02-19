@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="reception/header::community-header">
+	</head>
+    <body>
+		<div th:replace="reception/header::community-header-nav"></div>
+		<div th:replace="reception/body::community-body"></div>
+		<div th:replace="reception/footer::community-footer"></div>
+    </body>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+</html>

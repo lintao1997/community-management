@@ -1,0 +1,90 @@
+
+
+table1 = {'1',2,3,myfun}
+table1.myfun = function ()
+    print("我的第一个fun")
+end
+
+
+for i, v in pairs(table1) do
+    print(v,i)
+end
+
+print(table1.myfun())
+for i=1,#table,1 do
+
+    print(type(table[i]))
+end
+
+fruits = {"banana","orange","apple"}
+table.insert(fruits,"maogu")
+table.insert(fruits,2,"maogu2")
+print("连接后的字符串：",table.concat(fruits,","))
+table.sort(fruits)
+print("连接后的字符串：",table.concat(fruits,","))
+for k,v in ipairs(fruits) do
+    print(k,v)
+end
+print("连接后的字符串：",table.concat(fruits,",",2,3))
+function table_maxn(t)
+    local mn=nil;
+    for k, v in pairs(t) do
+        mn = v
+        if mn < v then
+            mn = v
+        end
+    end
+    return mn
+end
+tbl = {[1] = 2, [2] = 6, [3] = 34, [46] =45}
+function table_leng(t)
+    local leng=0
+    for k, v in pairs(t) do
+        print(k,v)
+        leng = leng +1;
+    end
+    return leng;
+end
+print(table_leng(tbl))
+print("tbl 最大值：", table_maxn(tbl))
+print("tbl 长度 ", #tbl)
+
+mytable = {}                          -- 普通表
+mymetatable = {}                      -- 元表
+setmetatable(mytable,mymetatable)     -- 把 mymetatable 设为 mytable 的元表
+print(getmetatable(mytable)==mymetatable)
+
+mytable = setmetatable({key1 = "value1"},{
+    __index = function(mytable,key)
+        if key == "key2" then
+            return "metatablevalue"
+        else
+            return nil
+        end
+    end
+})
+print(mytable.key1,mytable.key2)
+mytable = setmetatable({key1 = "value1"}, { __index = { key2 = "metatablevalue" } })
+print(mytable.key1,mytable.key2)
+
+mymetatable = {}
+mytable = setmetatable({key1 = "value1"}, { __newindex = mymetatable })
+
+print(mytable.key1)
+mytable.newkey = "新值2"
+print(mytable.newkey,mymetatable.newkey)
+mytable.key1 = "新值1"
+print(mytable.key1,mymetatable.key1)
+array = { name = "value1"}
+tbl = {1,2,3,4}
+tbl[2] = nil;
+
+
+function tt(eventype)
+    if(eventype==nil) then
+        return "2"
+    end
+    print("xixi")
+end
+local aa= tt(nil)
+print(aa)

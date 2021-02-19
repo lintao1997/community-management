@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gks.lcf.com.dao.AssociationMapper" >
+  <resultMap id="BaseResultMap2" type="gks.lcf.com.entity.Association" >
+    <id column="a_id" property="aId" jdbcType="INTEGER" />
+    <result column="a_name" property="aName" jdbcType="VARCHAR" />
+    <result column="a_image" property="aImage" jdbcType="VARCHAR" />
+    <result column="a_register_date" property="aRegisterData" jdbcType="TIMESTAMP" />
+    <result column="a_founder" property="aFounder" jdbcType="VARCHAR" />
+    <result column="a_status" property="aStatus" jdbcType="INTEGER" />
+    <result column="a_numbers" property="aNumbers" jdbcType="INTEGER" />
+    <result column="a_comments" property="aComments" jdbcType="VARCHAR" />
+    <result column="a_money" property="aMoney" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    a_id, a_name, a_image, a_register_date, a_founder, a_status, a_numbers, a_comments,
+    a_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap2" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from association
+    where a_id = #{aId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from association
+    where a_id = #{aId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="gks.lcf.com.entity.Association" >
+    insert into association (a_id, a_name, a_image, 
+      a_register_date, a_founder, a_status,
+      a_numbers, a_comments, a_money
+      )
+    values (#{aId,jdbcType=INTEGER}, #{aName,jdbcType=VARCHAR}, #{aImage,jdbcType=VARCHAR}, 
+      #{aRegisterData,jdbcType=TIMESTAMP}, #{aFounder,jdbcType=VARCHAR}, #{aStatus,jdbcType=INTEGER}, 
+      #{aNumbers,jdbcType=INTEGER}, #{aComments,jdbcType=VARCHAR}, #{aMoney,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="gks.lcf.com.entity.Association" >
+    insert into association
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aId != null" >
+        a_id,
+      </if>
+      <if test="aName != null" >
+        a_name,
+      </if>
+      <if test="aImage != null" >
+        a_image,
+      </if>
+      <if test="aRegisterData != null" >
+        a_register_date,
+      </if>
+      <if test="aFounder != null" >
+        a_founder,
+      </if>
+      <if test="aStatus != null" >
+        a_status,
+      </if>
+      <if test="aNumbers != null" >
+        a_numbers,
+      </if>
+      <if test="aComments != null" >
+        a_comments,
+      </if>
+      <if test="aMoney != null" >
+        a_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aId != null" >
+        #{aId,jdbcType=INTEGER},
+      </if>
+      <if test="aName != null" >
+        #{aName,jdbcType=VARCHAR},
+      </if>
+      <if test="aImage != null" >
+        #{aImage,jdbcType=VARCHAR},
+      </if>
+      <if test="aRegisterData != null" >
+        #{aRegisterData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aFounder != null" >
+        #{aFounder,jdbcType=VARCHAR},
+      </if>
+      <if test="aStatus != null" >
+        #{aStatus,jdbcType=INTEGER},
+      </if>
+      <if test="aNumbers != null" >
+        #{aNumbers,jdbcType=INTEGER},
+      </if>
+      <if test="aComments != null" >
+        #{aComments,jdbcType=VARCHAR},
+      </if>
+      <if test="aMoney != null" >
+        #{aMoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="gks.lcf.com.entity.Association" >
+    update association
+    <set >
+      <if test="aName != null" >
+        a_name = #{aName,jdbcType=VARCHAR},
+      </if>
+      <if test="aImage != null" >
+        a_image = #{aImage,jdbcType=VARCHAR},
+      </if>
+      <if test="aRegisterData != null" >
+        a_register_date = #{aRegisterData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aFounder != null" >
+        a_founder = #{aFounder,jdbcType=VARCHAR},
+      </if>
+      <if test="aStatus != null" >
+        a_status = #{aStatus,jdbcType=INTEGER},
+      </if>
+      <if test="aNumbers != null" >
+        a_numbers = #{aNumbers,jdbcType=INTEGER},
+      </if>
+      <if test="aComments != null" >
+        a_comments = #{aComments,jdbcType=VARCHAR},
+      </if>
+      <if test="aMoney != null" >
+        a_money = #{aMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="gks.lcf.com.entity.Association" >
+    update association
+    set a_name = #{aName,jdbcType=VARCHAR},
+      a_image = #{aImage,jdbcType=VARCHAR},
+      a_register_date = #{aRegisterData,jdbcType=TIMESTAMP},
+      a_founder = #{aFounder,jdbcType=VARCHAR},
+      a_status = #{aStatus,jdbcType=INTEGER},
+      a_numbers = #{aNumbers,jdbcType=INTEGER},
+      a_comments = #{aComments,jdbcType=VARCHAR},
+      a_money = #{aMoney,jdbcType=DOUBLE}
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+</mapper>

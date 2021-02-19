@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- jquery -->
+<script th:src="@{/js/static-js/jquery.js}"></script>
+<!-- public-js -->
+<script th:src="@{/js/static-js/public.js}"></script>
+
+<!-- bootstrap -->
+<script th:src="@{/js/static-js/bootstrap.min.js}"></script>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<!-- sweetalert -->
+<script th:src="@{/plugins/sweetalert/sweetalert.min.js}"></script>
+<link rel="stylesheet" th:href="@{/plugins/sweetalert/sweetalert.css}"/>
+<!-- Ionicons -->
+<link rel="stylesheet" th:href="@{/css/ionicons.min.css}">
+
+
+
+<meta charset="UTF-8">
+<title>登陆页面</title>
+<style type="text/css">
+	body{
+		margin-top:150px;
+		
+	}
+</style>
+</head>
+<body class="bg-gradient-primary" >
+  <div class="container" style="" >
+    <!-- Outer Row -->
+    <div class="row justify-content-center ">
+
+      <div class="col-xl-10 col-lg-8 col-md-9">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">登陆页面!</h1>
+                  </div>
+						 <span th:text="${blogUser}"></span>
+		         <form class="form-horizontal" accept-charset="UTF-8" id ="login_form"
+			             method="post">			
+                 	<div class="form-group">
+							<div class="alert alert-danger" id="login-error-msg"
+								style="display: none;">错误信息展示栏。</div>
+					</div>
+									
+                    <div class="form-group">
+				               <input type="hidden" name="rootId" id="rootId"  />
+			        </div>
+										
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control-user" id="username" name="username" placeholder="请输入账号">
+                    </div>
+					
+                    <div class="form-group">
+                      <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="请输入密码">
+                    </div>
+					
+                    <div class="form-group">
+                      <div class="custom-control custom-checkbox small">
+                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                        <label class="custom-control-label" for="customCheck">Remember Me</label>
+                      </div>
+                    </div>
+										
+                    <font color="red"></font>
+                     <button type="button" class="btn btn-primary btn-user btn-block" id="loginsubmit">登录</button>
+                    <hr>
+                  </form>
+                  <hr>
+                  <div class="text-center">
+                    <a class="small" href="#">注册账号!</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>	
+</body>
+<script type="text/javascript">
+$(function(){
+	//增加用户
+	$("#loginsubmit").click(function(){
+        var username = $("#username").val();
+        var password = $("#password").val();
+        console.log(username);
+        console.log(password);
+        if (isNull(username)) {
+        	console.log("aa");
+            $('#login-error-msg').css("display", "block");
+            $('#login-error-msg').html("用户名不能为空！");
+            return;
+        }
+        if (isNull(password)) {
+            $('#login-error-msg').css("display", "block");
+            $('#login-error-msg').html("密码不能为空！");
+            return;
+        }
+        var params = $('#login_form').serialize();
+        console.log(params);
+		$.ajax({
+			type:'post',
+			url:'/user/login',
+			data:params,
+			dataType:'json',
+			success:function(r){
+				if(r.resultCode==200){
+					swal({
+						  title: '登陆成功', 
+						  text: '登陆成功即将跳到主页', 
+						  type: 'success',
+						  icon: "success",
+						  timer: 3000
+						}).then(function(){
+							window.location.href="/";
+						})
+				}else{
+					swal(r.message, {
+	                    icon: "error",
+	                });
+					reset();
+				}
+			},
+			error:function(r){
+				swal(r.message, {
+                    icon: "error",
+                });
+				reset();
+			}
+		});
+	});
+})
+function reset() {
+$("#username").val('');
+$("#password").val('');
+}
+</script>
+</html>
+</html>
